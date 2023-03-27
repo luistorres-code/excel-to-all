@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tranformación de documento Excel</title>
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" />
+		<link rel="stylesheet" href="./styles/index.css" />
+	</head>
+	<body>
+		<aside>
+			<h1>Tranformación de documento Excel</h1>
+			<p>Selecciona una opción para comenzar</p>
+			<form>
+				<label for="options">Opciones</label>
+				<select name="options" id="options">
+					<option value="" selected disabled>Selecciona una opción</option>
+					<option value="json">Crear JSON</option>
+					<option value="all">Crear JSON y query SQL</option>
+					<option value="query">Crear Query</option>
+				</select>
+
+				<label for="file">Selecciona un archivo</label>
+				<input type="file" id="file" name="file" accept=".xlsx, .xls" />
+
+				<label for="tableName">Nombre de la tabla</label>
+				<input type="text" name="tableName" id="tableName" />
+
+				<button type="button" id="sendExcel">Enviar</button>
+			</form>
+		</aside>
+		<main>
+			<h2>Resultado</h2>
+			<section id="result">
+				<section id="jsonViewerContainer">
+					<header>
+						<h3>JSON</h3>
+						<button class="button" id="copyJSONButton">Copiar</button>
+					</header>
+					<pre>
+						<code id="jsonViewer" class="json"></code>
+					</pre>
+				</section>
+
+				<section id="queryViewerContainer">
+					<header>
+						<h3>Query SQL</h3>
+						<button class="button" id="copyQueryButton">Copiar</button>
+					</header>
+					<pre>
+						<code id="queryViewer" class="sql"></code>
+					</pre>
+				</section>
+			</section>
+		</main>
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+		<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.19.2/package/dist/xlsx.full.min.js"></script>
+		<script src="./js/main.js"></script>
+	</body>
+</html>
