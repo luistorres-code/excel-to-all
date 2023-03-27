@@ -6,47 +6,53 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Tranformación de documento Excel</title>
 
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css" />
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/androidstudio.min.css" />
 		<link rel="stylesheet" href="./styles/index.css" />
 	</head>
-	<body>
-		<aside>
-			<h1>Tranformación de documento Excel</h1>
+	<body class="flex h-screen flex-col p-3">
+		<aside class="p-2 flex flex-col items-center justify-center w-full">
+			<h1 class="text-slate-800 text-3xl font-semibold">Tranformación de documento Excel</h1>
 			<p>Selecciona una opción para comenzar</p>
-			<form>
-				<label for="options">Opciones</label>
-				<select name="options" id="options">
-					<option value="" selected disabled>Selecciona una opción</option>
-					<option value="json">Crear JSON</option>
-					<option value="all">Crear JSON y query SQL</option>
-					<option value="query">Crear Query</option>
-				</select>
+			<form class="flex flex-col">
+				<fieldset class="mt-3 flex flex-col p-2">
+					<label for="options" class="font-light text-sm">Operaciones disponibles</label>
+					<select name="options" id="options" class="rounded border-b border-gray-500">
+						<option value="" selected disabled>Selecciona una opción</option>
+						<option value="json">Crear JSON</option>
+						<option value="all">Crear JSON y query SQL</option>
+						<option value="query">Crear Query</option>
+					</select>
+				</fieldset>
 
-				<label for="file">Selecciona un archivo</label>
-				<input type="file" id="file" name="file" accept=".xlsx, .xls" />
+				<fieldset id="fileInputContainer" class="mt-3 p-2 hidden">
+					<label for="file" class="font-light text-sm">Selecciona un archivo</label>
+					<input type="file" id="file" name="file" accept=".xlsx, .xls" class="m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border-b border-solid border-gray-500 bg-clip-padding py-[0.32rem] px-3 text-xs font-normal transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none" />
+				</fieldset>
 
-				<label for="tableName">Nombre de la tabla</label>
-				<input type="text" name="tableName" id="tableName" />
+				<fielset id="tableNameCOntainer" class="mt-3 p-2 hidden">
+					<label for="tableName" class="font-light text-sm">Nombre de la tabla</label>
+					<input type="text" name="tableName" id="tableName" class="rounded border-b border-gray-500" />
+				</fielset>
 
-				<button type="button" id="sendExcel">Enviar</button>
+				<button type="button" id="sendExcel" class="hidden mt-3 border border-solid border-gray-500 rounded px-4 py-2 focus:bg-gray-400 focus:text-white hover:bg-gray-300">Enviar</button>
 			</form>
 		</aside>
 		<main>
-			<h2>Resultado</h2>
+			<h2 class="font-semibold text-3xl sm:text-2xl">Resultado de las operaciones</h2>
 			<section id="result">
-				<section id="jsonViewerContainer">
-					<header>
-						<h3>JSON</h3>
-						<button class="button" id="copyJSONButton">Copiar</button>
+				<section id="jsonViewerContainer" class="hidden">
+					<header class="flex justify-between items-center flex-nowrap w-full px-3 py-1 bg-gray-800 text-gray-200">
+						<h3 class="text-xs font-semibold">JSON</h3>
+						<button type="button" class="button" id="copyJSONButton">Copiar</button>
 					</header>
-					<pre>
-						<code id="jsonViewer" class="json"></code>
+					<pre class="mt-0 inline-block h-auto max-h-none">
+						<code id="jsonViewer" class="max-h-96 mt-0 json"></code>
 					</pre>
 				</section>
 
-				<section id="queryViewerContainer">
-					<header>
-						<h3>Query SQL</h3>
+				<section id="queryViewerContainer" class="hidden">
+					<header class="flex justify-between items-center flex-nowrap w-full px-3 py-1 bg-gray-800 text-gray-200">
+						<h3 class="text-xs font-semibold">Query SQL</h3>
 						<button class="button" id="copyQueryButton">Copiar</button>
 					</header>
 					<pre>
